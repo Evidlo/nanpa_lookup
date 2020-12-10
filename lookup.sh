@@ -29,8 +29,8 @@ then
     while read number
     do
         parse_number $number >> npanxx.txt
-        lookup
     done < "$2"
+    lookup
 else
     parse_number $2 > npanxx.txt
     lookup
