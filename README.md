@@ -28,7 +28,7 @@ Or provide line separated list of numbers:
     
 Get a list of unique registrants:
 
-    >>> ./lookup.sh -f path/to/numbers.txt | sort | uniq
+    >>> ./lookup.sh -f path/to/numbers.txt | sort | uniq -c | sort -n
     "GCI COMMUNICATION CORP. DBA GENERAL COMMUNICATION"
     "CELLCO PARTNERSHIP DBA VERIZON WIRELESS - NC"
     "ONVOY, LLC - TN"
