@@ -32,3 +32,13 @@ Get a list of unique registrants:
     "GCI COMMUNICATION CORP. DBA GENERAL COMMUNICATION"
     "CELLCO PARTNERSHIP DBA VERIZON WIRELESS - NC"
     "ONVOY, LLC - TN"
+    
+## Exporting calls from Android
+
+Download contacts database
+
+    adb shell "su -c 'cat /data/data/com.android.providers.contacts/databases/contacts2.db'" > contacts2.db
+
+Dump all calls to numbers.txt
+
+    sqlite3 contacts2.db "SELECT normalized_number FROM calls WHERE duration==0;" > numbers.txt
