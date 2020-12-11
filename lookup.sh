@@ -19,7 +19,7 @@ lookup() {
 
 # convert number to NPA-NXX code
 parse_number() {
-    NUMBER=$(sed 's/-//' <<< $1)
+    NUMBER=$(sed 's/-//;s/\+1//' <<< $1)
     echo ${NUMBER:0:3}-${NUMBER:3:3}
 }
 
