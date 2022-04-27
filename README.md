@@ -2,40 +2,6 @@
 
 Look up callers in the North America Number Plan Adminstrator (NANPA) database. Useful for identifying source of robocalls.
 
-### Quickstart (Android)
-
-Grabs the call log from Android dialer and counts number of calls from each registrant in the database.
-
-Requires `adb`, `sqlite3` and a rooted phone.
-
-``` bash
-git clone http://github.com/evidlo/nanpa_lookup && cd nanpa_lookup
-adb root
-adb pull /data/data/com.android.providers.contacts/databases/contacts2.db
-sqlite3 contacts2.db "SELECT normalized_number FROM calls;" > numbers.txt
-./lookup.sh -f numbers.txt | sort | uniq -c | sort -n
-```
-    
-For example, here are the top few companies with the largest number of calls to my cell:
-
-```
-    643 "CELLCO PARTNERSHIP DBA VERIZON WIRELESS - GA"              
-    665 "OMNIPOINT COMMUNICATIONS, INC. - NY"                       
-    666 "LEVEL 3 COMMUNICATIONS, LLC - CA"                          
-    713 "CELLCO PARTNERSHIP DBA VERIZON WIRELESS - MI"              
-    754 "ONVOY, LLC - CA"                                           
-    776 "CELLCO PARTNERSHIP DBA VERIZON WIRELESS - FL"              
-    818 "CELLCO PARTNERSHIP DBA VERIZON WIRELESS - OH"              
-    848 "CELLCO PARTNERSHIP DBA VERIZON WIRELESS - TX"              
-    903 "CELLCO PARTNERSHIP DBA VERIZON WIRELESS - NY"              
-   1495 "CELLCO PARTNERSHIP DBA VERIZON WIRELESS - CA"              
-   2605 "NEW CINGULAR WIRELESS PCS, LLC - DC"                       
-   3408 "NEW CINGULAR WIRELESS PCS, LLC - GA"                       
-   5448 "NEW CINGULAR WIRELESS PCS, LLC - IL" 
-```
-
-Onvoy LLC, Level 3 Communications, and Omnipoint Communications are all VOIP companies.
-
 ### Usage
 
 Query the database for a number:
@@ -53,15 +19,43 @@ Or provide a file containing phone numbers:
     "ONVOY, LLC - TN"
     "GCI COMMUNICATION CORP. DBA GENERAL COMMUNICATION"
     
-### Exporting calls from Android
 
-Download contacts database
+### Pull Logs from Android
 
-    adb shell "su -c 'cat /data/data/com.android.providers.contacts/databases/contacts2.db'" > contacts2.db
+Grabs the call log from Android dialer and counts number of calls from each registrant in the database.
 
-Dump all calls to numbers.txt.  Filter out long conversations that are obviously not spam
+Requires `adb`, `sqlite3` and a rooted phone.
 
-    sqlite3 contacts2.db "SELECT normalized_number FROM calls WHERE duration <= 1;" > numbers.txt
+``` bash
+./lookup.sh -a
+```
+
+```
+      1 AIRUS, INC. - AL
+      1 AIRUS, INC. - SD
+      1 BANDWIDTH.COM CLEC, LLC - TN
+      1 BELLSOUTH TELECOMM INC DBA SOU
+      1 ONVOY, LLC - AL
+      1 ONVOY, LLC - GA
+      1 ONVOY, LLC - MD
+      1 ONVOY, LLC - MO
+      1 ONVOY, LLC - TX
+      1 ONVOY, LLC - UT
+      1 ONVOY, LLCV - MI
+      1 ONVOY, LLC - WA
+      1 ONVOY, LLC - WY
+      1 PEERLESS NETWORK OF GEORGIA, L
+      1 PEERLESS NETWORK OF INDIANA, L
+      1 PEERLESS NETWORK OF MISSOURI, 
+      1 PEERLESS NETWORK OF NORTH CARO
+      2 LEVEL 3 COMMUNICATIONS, LLC - 
+      2 ONVOY, LLC - AR
+      2 ONVOY, LLC - MT
+      5 ONVOY, LLC
+     17 NEW CINGULAR WIRELESS PCS, LLC
+     19 ONVOY, LLC - TN
+     22 T-MOBILE USA, INC.
+```
 
 ### Caveats
 
