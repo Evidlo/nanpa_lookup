@@ -22,9 +22,7 @@ Or provide a file containing phone numbers:
 
 ### Pull Logs from Android
 
-Grabs the call log from Android dialer and counts number of calls from each registrant in the database.
-
-Requires `adb`, `sqlite3` and a rooted phone.
+Grabs call log for last 30 days from a rooted Android phone via adb:
 
 ``` bash
 ./lookup.sh -a

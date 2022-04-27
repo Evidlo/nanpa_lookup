@@ -43,10 +43,12 @@ then
     # (current time - 30 days) in milliseconds
     date=$(($(date '+%s000') - (${last_N_days} * 24 * 60 * 60 * 1000)))
     adb root
+
     # adb pull /data/data/com.android.providers.contacts/databases/contacts2.db
-    # sqlite3 contacts2.db "SELECT normalized_number FROM calls;" > numbers.txt
+    # sqlite3 contacts2.db "SELECT normalized_number FROM calls WHERE date >= ${date};" > numbers.txt
     adb pull /data/data/com.android.providers.contacts/databases/calllog.db
     sqlite3 calllog.db "SELECT normalized_number FROM calls WHERE date >= ${date};" > numbers.txt
+
     ./lookup.sh -f numbers.txt | sort | uniq -c | sort -n
 fi
 
