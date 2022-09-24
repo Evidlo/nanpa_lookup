@@ -18,7 +18,7 @@ def lookup_number(db, number):
         number (str): number to lookup
 
     Returns:
-        dict: dict w/ fields 'company', 'email', 'firstdig', 'npanxx', 'ocn', 'type'
+        dict: dict w/ fields 'company', 'email', 'npanxxy', 'ocn', 'type'
     """
     regex = "(?:\+1)?([0-9]{3})-?([0-9]{3})-?([0-9])?(?:[0-9]{3})?"
     match = re.search(regex, number)
@@ -77,7 +77,7 @@ parser = argparse.ArgumentParser(description="Look up number in NANPA database")
 parser.add_argument("-n", type=str, help="number")
 parser.add_argument("-f", type=str, help="file containing list of numbers")
 parser.add_argument("-a", type=int, help="file containing list of numbers")
-parser.add_argument("--field", type=str, help="print out specific field")
+parser.add_argument("--field", type=str, help="print out specific field (company, npanxxy, type, ocn, email)")
 parser.add_argument("--query", type=str, help="make arbitrary SQL query")
 parser.add_argument("--database", type=str, default='database.sqlite', help="numbers database")
 args = parser.parse_args()
