@@ -6,53 +6,46 @@ Look up callers in the North America Number Plan Adminstrator (NANPA) database. 
 
 Query the database for a number:
 
-    >>> ./lookup.sh -n 907-200-1234
-    "GCI COMMUNICATION CORP. DBA GENERAL COMMUNICATION"
-    >>> ./lookup.sh -n 9072001234
-    "GCI COMMUNICATION CORP. DBA GENERAL COMMUNICATION"
+    >>> ./lookup.py -n 9072001234 --field company
+    GCI COMMUNICATION CORP. DBA GENERAL COMMUNICATION
 
 Or provide a file containing phone numbers:
 
-    >>> ./lookup.sh -f path/to/numbers.txt
-    "GCI COMMUNICATION CORP. DBA GENERAL COMMUNICATION"
-    "CELLCO PARTNERSHIP DBA VERIZON WIRELESS - NC"
-    "ONVOY, LLC - TN"
-    "GCI COMMUNICATION CORP. DBA GENERAL COMMUNICATION"
+    >>> ./lookup.py -f numbers.txt --field company
+    GCI COMMUNICATION CORP. DBA GENERAL COMMUNICATION
+    CELLCO PARTNERSHIP DBA VERIZON WIRELESS - NC
+    ONVOY, LLC - TN
+    GCI COMMUNICATION CORP. DBA GENERAL COMMUNICATION
     
 
 ### Pull Logs from Android
 
-Grabs call log for last 30 days from a rooted Android phone via adb:
+Grab call log for last 30 days from a rooted Android phone via adb:
 
 ``` bash
-./lookup.sh -a
+./lookup.py -a 30 --field company | sort | uniq -c
 ```
 
 ```
-      1 AIRUS, INC. - AL
-      1 AIRUS, INC. - SD
+      1 BANDWIDTH.COM CLEC, LLC - MS
       1 BANDWIDTH.COM CLEC, LLC - TN
-      1 BELLSOUTH TELECOMM INC DBA SOU
-      1 ONVOY, LLC - AL
-      1 ONVOY, LLC - GA
-      1 ONVOY, LLC - MD
-      1 ONVOY, LLC - MO
-      1 ONVOY, LLC - TX
-      1 ONVOY, LLC - UT
-      1 ONVOY, LLCV - MI
-      1 ONVOY, LLC - WA
-      1 ONVOY, LLC - WY
-      1 PEERLESS NETWORK OF GEORGIA, L
-      1 PEERLESS NETWORK OF INDIANA, L
-      1 PEERLESS NETWORK OF MISSOURI, 
-      1 PEERLESS NETWORK OF NORTH CARO
+     16 BRIGHTLINK COMMUNICATIONS, LLC
+      2 CELLCO PARTNERSHIP DBA VERIZON
+      1 CENTURYTEL OF LARSEN-READFIELD
+      3 CHARTER FIBERLINK-TENNESSEE, L
+      1 COMCAST IP PHONE, LLC
+      1 GLOBAL CROSSING LOCAL SERVICES
+     15 ILLINOIS BELL TEL CO
       2 LEVEL 3 COMMUNICATIONS, LLC - 
-      2 ONVOY, LLC - AR
-      2 ONVOY, LLC - MT
-      5 ONVOY, LLC
-     17 NEW CINGULAR WIRELESS PCS, LLC
-     19 ONVOY, LLC - TN
-     22 T-MOBILE USA, INC.
+      1 MCIMETRO ACCESS TRANSMISSION S
+     10 NEW CINGULAR WIRELESS PCS, LLC
+      9 No matches found
+      8 ONVOY, LLC
+      5 ONVOY, LLC - TN
+      3 PEERLESS NETWORK OF TENNESSEE,
+      4 TELEPORT COMMUNICATIONS AMERIC
+      8 T-MOBILE USA, INC.
+     16 UNITED STATES CELLULAR - TN
 ```
 
 ### Caveats
