@@ -2,16 +2,18 @@
 
 Look up callers in the North America Number Plan Adminstrator (NANPA) database. Useful for identifying source of robocalls.
 
-### Usage
+### Quickstart
+
+    $ pip install nanpa_lookup
 
 Query the database for a number:
 
-    >>> ./lookup.py -n 9072001234 --field company
+    $ nanpa_lookup -n 9072001234 --field company
     GCI COMMUNICATION CORP. DBA GENERAL COMMUNICATION
 
 Or provide a file containing phone numbers:
 
-    >>> ./lookup.py -f numbers.txt --field company
+    $ nanpa_lookup -f numbers.txt --field company
     GCI COMMUNICATION CORP. DBA GENERAL COMMUNICATION
     CELLCO PARTNERSHIP DBA VERIZON WIRELESS - NC
     ONVOY, LLC - TN
@@ -23,29 +25,35 @@ Or provide a file containing phone numbers:
 Grab call log for last 30 days from a rooted Android phone via adb:
 
 ``` bash
-./lookup.py -a 30 --field company | sort | uniq -c
+$ nanpa_lookup -a 30 --field company | sort | uniq -c | sort -n
+      3 ONVOY, LLC - TN
+      3 PEERLESS NETWORK OF TENNESSEE,
+      4 BELLSOUTH TELECOMM INC DBA SOU
+      4 TELEPORT COMMUNICATIONS AMERIC
+      5 NEW CINGULAR WIRELESS PCS, LLC
+      5 ONVOY, LLC
+      6 LEVEL 3 COMMUNICATIONS, LLC - 
+      9 No matches found
+     11 ILLINOIS BELL TEL CO
+     27 BRIGHTLINK COMMUNICATIONS, LLC
 ```
 
+### Usage
+
 ```
-      1 BANDWIDTH.COM CLEC, LLC - MS
-      1 BANDWIDTH.COM CLEC, LLC - TN
-     16 BRIGHTLINK COMMUNICATIONS, LLC
-      2 CELLCO PARTNERSHIP DBA VERIZON
-      1 CENTURYTEL OF LARSEN-READFIELD
-      3 CHARTER FIBERLINK-TENNESSEE, L
-      1 COMCAST IP PHONE, LLC
-      1 GLOBAL CROSSING LOCAL SERVICES
-     15 ILLINOIS BELL TEL CO
-      2 LEVEL 3 COMMUNICATIONS, LLC - 
-      1 MCIMETRO ACCESS TRANSMISSION S
-     10 NEW CINGULAR WIRELESS PCS, LLC
-      9 No matches found
-      8 ONVOY, LLC
-      5 ONVOY, LLC - TN
-      3 PEERLESS NETWORK OF TENNESSEE,
-      4 TELEPORT COMMUNICATIONS AMERIC
-      8 T-MOBILE USA, INC.
-     16 UNITED STATES CELLULAR - TN
+usage: nanpa_lookup [-h] [-n N] [-f F] [-a A] [--field FIELD] [--query QUERY]
+                    [--database DATABASE]
+
+Look up number in NANPA database
+
+options:
+  -h, --help           show this help message and exit
+  -n N                 number
+  -f F                 file containing list of numbers
+  -a A                 pull numbers from ADB device
+  --field FIELD        print out specific field (company, npanxxy, type, ocn, email)
+  --query QUERY        make arbitrary SQL query
+  --database DATABASE  numbers database
 ```
 
 ### Caveats

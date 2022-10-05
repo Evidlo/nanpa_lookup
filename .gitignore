@@ -1,3 +1,8 @@
+build/
+dist/
 *zip
 *txt
+*pyc
+*.egg-info/
 *db
+sms-email-ocn.csv
