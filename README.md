@@ -19,9 +19,6 @@ Or provide a file containing phone numbers:
     ONVOY, LLC - TN
     GCI COMMUNICATION CORP. DBA GENERAL COMMUNICATION
     
-
-### Pull Logs from Android
-
 Grab call log for last 30 days from a rooted Android phone via adb:
 
 ``` bash
